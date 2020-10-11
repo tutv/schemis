@@ -1,7 +1,8 @@
 import {Connection, Model} from "mongoose"
 
 interface Options {
-
+    connection: Connection,
+    schemas: String,
 }
 
 interface Schemis {
