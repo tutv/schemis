@@ -28,6 +28,18 @@ module.exports = (uri, options) => {
         console.log('MongoDB is reconnected.')
     })
 
+    connection.on('disconnected', () => {
+        console.log('MongoDB is disconnected.')
+    })
+
+    connection.on('close', () => {
+        console.log('MongoDB is closed.')
+    })
+
+    connection.on('error', (error) => {
+        console.log('MongoDB is error.', error)
+    })
+
     return connection
 }
 
