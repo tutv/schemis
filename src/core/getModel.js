@@ -1,5 +1,23 @@
 const path = require('path')
 
+const _schemas = {}
+const _getSchema = (dirPath, name) => {
+    if (_schemas[name]) return _schemas[name]
+
+    const pathModel = path.join(dirPath, name)
+    _schemas[name] = require(pathModel)
+
+    return _schemas[name]
+}
+
+const _models = {}
+const _getModel = (connection, name, schema) => {
+    if (_models[name]) return _models[name]
+
+    _models[name] = connection.model(name, schema)
+
+    return _models[name]
+}
 
 module.exports = store => (modelName = '') => {
     const name = (modelName || '').trim()
@@ -8,11 +26,15 @@ module.exports = store => (modelName = '') => {
         throw new Error('Model name is required.')
     }
 
-    const {connection, schemas} = store
+    try {
+        const {connection, schemas} = store
+        const schema = _getSchema(schemas, name)
 
-    const pathModel = path.join(schemas, name)
-    const Model = require(pathModel)
+        return _getModel(connection, name, schema)
+    } catch (error) {
+        console.log("GET_MODEL_ERROR", error)
 
-    return connection.model(name, Model)
+        return process.exit(1)
+    }
 }
 
