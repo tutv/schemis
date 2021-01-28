@@ -11,15 +11,15 @@ const _getSchema = (dirPath, name) => {
 }
 
 const _models = {}
-const _getModel = (connection, name, schema) => {
+const _getModel = (connection, name, schema, collectionName) => {
     if (_models[name]) return _models[name]
 
-    _models[name] = connection.model(name, schema)
+    _models[name] = connection.model(name, schema, collectionName || name)
 
     return _models[name]
 }
 
-module.exports = store => (modelName = '') => {
+module.exports = store => (modelName = '', collectionName = '') => {
     const name = (modelName || '').trim()
 
     if (!name) {
@@ -30,7 +30,7 @@ module.exports = store => (modelName = '') => {
         const {connection, schemas} = store
         const schema = _getSchema(schemas, name)
 
-        return _getModel(connection, name, schema)
+        return _getModel(connection, name, schema, collectionName)
     } catch (error) {
         console.log("GET_MODEL_ERROR", error)
 
