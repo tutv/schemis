@@ -12,11 +12,13 @@ const _getSchema = (dirPath, name) => {
 
 const _models = {}
 const _getModel = (connection, name, schema, collectionName) => {
-    if (_models[name]) return _models[name]
+    const key = collectionName || name
 
-    _models[name] = connection.model(name, schema, collectionName || name)
+    if (_models[key]) return _models[key]
 
-    return _models[name]
+    _models[key] = connection.model(name, schema, key)
+
+    return _models[key]
 }
 
 module.exports = store => (modelName = '', collectionName = '') => {
