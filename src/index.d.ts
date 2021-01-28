@@ -2,11 +2,11 @@ import {Connection, Model} from "mongoose"
 
 interface Options {
     connection: Connection,
-    schemas: String,
+    schemas: string,
 }
 
 interface Schemis {
-    getModel(modelName: String): Model<any>,
+    getModel(modelName: string, collectionName?: string): Model<any>,
 
     getConnection(): Connection,
 }
@@ -18,5 +18,5 @@ interface CreateConnection {
 
 export function createStore(opts: Options): Schemis
 
-export function createConnection(URI: String, opts?: CreateConnection): Connection
+export function createConnection(URI: string, opts?: CreateConnection): Connection
 
