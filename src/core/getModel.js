@@ -16,7 +16,7 @@ const _getModel = (connection, name, schema, collectionName) => {
 
     if (_models[key]) return _models[key]
 
-    _models[key] = connection.model(name, schema, key)
+    _models[key] = connection.model(name, schema, collectionName ? collectionName : null)
 
     return _models[key]
 }
