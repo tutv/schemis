@@ -8,7 +8,7 @@ module.exports = (uri, options) => {
     }
 
     const defaultOpts = {
-        useCreateIndex: true,
+        autoIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true
     }
