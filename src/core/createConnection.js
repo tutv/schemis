@@ -1,4 +1,4 @@
-const Monoose = require('mongoose')
+const Mongoose = require('mongoose')
 
 
 module.exports = (uri, options) => {
@@ -14,7 +14,7 @@ module.exports = (uri, options) => {
     }
     const vOptions = Object.assign({}, defaultOpts, options)
 
-    const connection = Monoose.createConnection(uri, vOptions)
+    const connection = Mongoose.createConnection(uri, vOptions)
 
     connection.on('connected', () => {
         console.log('MongoDB is connected.')
