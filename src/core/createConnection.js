@@ -9,8 +9,6 @@ module.exports = (uri, options) => {
 
     const defaultOpts = {
         autoIndex: true,
-        useNewUrlParser: true,
-        useUnifiedTopology: true
     }
     const vOptions = Object.assign({}, defaultOpts, options)
 
